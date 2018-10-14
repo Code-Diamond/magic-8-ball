@@ -23,7 +23,7 @@ lst.extend([" It is certain.",
 			" My reply is no.",
 			"  My sources\n     say no.",
 			" Outlook not so\n         good.",
-			" Very doubtful.",
+			# " Very doubtful.",
 			"Duh."])
 def deleteTags():
 	canvas.delete("all")
@@ -31,15 +31,38 @@ def deleteTags():
 def after(x, y):
 	window.after(x, y)
 def bind():
-	canvas.bind("<Button-1>", clicked)	
+	unbind()
+	canvas.bind("<Button-1>", clicked)
+def bind2():
+	unbind()	
+	canvas.bind("<Button-1>", clicked2)
 def unbind():
 	canvas.unbind("<Button-1>")	
-def clicked(event):
-	deleteTags()
+def rotateBacksideLeft():
 	unbind()
+	deleteTags()
 	after(25, removeBackside)
 	after(50, removeBackside2)
 	after(100, removeBackside3)
+	bind()
+def rotateFrontLeft():
+	unbind()
+	deleteTags()
+	after(25, removeFront)
+	after(50, removeFront2)
+	after(100, removeFront3)
+	bind()
+def clicked2(event):
+	deleteTags()
+	unbind()
+	# after(5,rotateFrontLeft())
+	after(1,make8())
+	canvas.pack()	
+	after(100, bind())
+def clicked(event):
+	deleteTags()
+	unbind()
+	rotateBacksideLeft()
 	after(150, barely)
 	after(200, barely2)
 	after(250, semi)
@@ -47,7 +70,8 @@ def clicked(event):
 	after(350, almost)
 	after(400, almost2)
 	after(450, response)
-	after(500, bind)
+	after(500, bind2)
+
 def removeBackside():
 	deleteTags()
 	canvas.create_oval(130,180, w-250, h-180, fill="#1b1b1c", tag="backside-inner")
@@ -60,7 +84,18 @@ def removeBackside3():
 	deleteTags()
 	canvas.create_oval(10,210, w-450, h-210, fill="#1b1b1c", tag="backside-inner")
 	canvas.create_text(50,300,fill="white",font="Calibri 50 bold", text="8", tag="backside")	
-
+def removeFront():
+	deleteTags()
+	canvas.create_oval(130,180, w-250, h-180, fill="#1b1b1c", tag="backside-inner")
+	# canvas.create_text(230,300,fill="white",font="Calibri 70 bold", text="8", tag="backside")
+def removeFront2():
+	deleteTags()
+	canvas.create_oval(30,180, w-350, h-180, fill="#1b1b1c", tag="backside-inner")
+	# canvas.create_text(100,300,fill="white",font="Calibri 60 bold", text="8", tag="backside")	
+def removeFront3():
+	deleteTags()
+	canvas.create_oval(10,210, w-450, h-210, fill="#1b1b1c", tag="backside-inner")
+	# canvas.create_text(50,300,fill="white",font="Calibri 50 bold", text="8", tag="backside")	
 def barely():
 	deleteTags()
 	canvas.create_oval(500,200, w-10, h-210, fill="#1b1b1c", tag="inner")
@@ -107,11 +142,12 @@ window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 #Make canvas object
 canvas = tk.Canvas(window, width = w, height = h, bg='#c2d1ea', highlightbackground="#c2d1ea")
 #Make Eightball
-canvas.create_oval(10,10, w-10, h-10, fill="black", outline="#1b1b1c")
-canvas.create_oval(180,180, w-180, h-180, fill="#1b1b1c", tag="backside-inner")
-canvas.create_text(300,300,fill="white",font="Calibri 70 bold", text="8", tag="backside")
-canvas.pack()
-
+def make8():
+	canvas.create_oval(10,10, w-10, h-10, fill="black", outline="#1b1b1c")
+	canvas.create_oval(180,180, w-180, h-180, fill="#1b1b1c", tag="backside-inner")
+	canvas.create_text(300,300,fill="white",font="Calibri 70 bold", text="8", tag="backside")
+	canvas.pack()
+make8()
 ####comment for single response testing###
 canvas.bind("<Button-1>", clicked)
 #### unlock for testing single response ####
