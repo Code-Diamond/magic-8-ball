@@ -28,18 +28,26 @@ lst.extend([" It is certain.",
 def deleteTags():
 	canvas.delete("all")
 	canvas.create_oval(10,10, w-10, h-10, fill="black", outline="#1b1b1c")
+def after(x, y):
+	window.after(x, y)
+def bind():
+	canvas.bind("<Button-1>", clicked)	
+def unbind():
+	canvas.unbind("<Button-1>")	
 def clicked(event):
 	deleteTags()
-	window.after(25, removeBackside)
-	window.after(50, removeBackside2)
-	window.after(100, removeBackside3)
-	window.after(150, barely)
-	window.after(200, barely2)
-	window.after(250, semi)
-	window.after(300, semi2)
-	window.after(350, almost)
-	window.after(400, almost2)
-	window.after(450, response)	
+	unbind()
+	after(25, removeBackside)
+	after(50, removeBackside2)
+	after(100, removeBackside3)
+	after(150, barely)
+	after(200, barely2)
+	after(250, semi)
+	after(300, semi2)
+	after(350, almost)
+	after(400, almost2)
+	after(450, response)
+	after(500, bind)
 def removeBackside():
 	deleteTags()
 	canvas.create_oval(130,180, w-250, h-180, fill="#1b1b1c", tag="backside-inner")
@@ -52,6 +60,7 @@ def removeBackside3():
 	deleteTags()
 	canvas.create_oval(10,210, w-450, h-210, fill="#1b1b1c", tag="backside-inner")
 	canvas.create_text(50,300,fill="white",font="Calibri 50 bold", text="8", tag="backside")	
+
 def barely():
 	deleteTags()
 	canvas.create_oval(500,200, w-10, h-210, fill="#1b1b1c", tag="inner")
