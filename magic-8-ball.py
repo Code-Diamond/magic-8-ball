@@ -2,35 +2,65 @@ import random
 import time
 import sys
 import tkinter as tk
-def clicked(event):
+def deleteTags():
 	canvas.delete(canvas.gettags("inner"))
 	canvas.delete(canvas.gettags("triangle"))
 	canvas.delete(canvas.gettags("response"))
-	window.after(150, barely)
-	window.after(250, semi)
-	window.after(350, almost)
-	window.after(450, response)
-	
+	canvas.delete(canvas.gettags("backside"))
+	canvas.delete(canvas.gettags("backside-inner"))
+def clicked(event):
+	deleteTags()
+	window.after(50, removeBackside)
+	window.after(100, removeBackside2)
+	window.after(150, removeBackside3)
+	window.after(200, barely)
+	window.after(250, barely2)
+	window.after(300, semi)
+	window.after(350, semi2)
+	window.after(400, almost)
+	window.after(450, almost2)
+	window.after(500, response)	
+def removeBackside():
+	deleteTags()
+	canvas.create_oval(130,180, w-250, h-180, fill="#1b1b1c", tag="backside-inner")
+	canvas.create_text(230,300,fill="white",font="Calibri 70 bold", text="8", tag="backside")
+def removeBackside2():
+	deleteTags()
+	canvas.create_oval(30,180, w-350, h-180, fill="#1b1b1c", tag="backside-inner")
+	canvas.create_text(100,300,fill="white",font="Calibri 60 bold", text="8", tag="backside")	
+def removeBackside3():
+	deleteTags()
+	canvas.create_oval(10,210, w-450, h-210, fill="#1b1b1c", tag="backside-inner")
+	canvas.create_text(50,300,fill="white",font="Calibri 50 bold", text="8", tag="backside")	
 def barely():
-	canvas.delete(canvas.gettags("inner"))
+	deleteTags()
 	#inner circle
 	canvas.create_oval(500,200, w-10, h-210, fill="#1b1b1c", tag="inner")
 	#Pack, start loops
-	print("semi")
+def barely2():
+	deleteTags()
+	#inner circle
+	canvas.create_oval(400,190, w-40, h-190, fill="#1b1b1c", tag="inner")
 def semi():
-	canvas.delete(canvas.gettags("inner"))
+	deleteTags()
+	#inner circle
+	canvas.create_oval(300,180, w-55, h-180, fill="#1b1b1c", tag="inner")
+	#Pack, start loops
+def semi2():
+	deleteTags()
 	#inner circle
 	canvas.create_oval(250,180, w-70, h-180, fill="#1b1b1c", tag="inner")
-	#Pack, start loops
-	print("semi")
 def almost():
-	canvas.delete(canvas.gettags("inner"))
+	deleteTags()
 	#inner circle
-	canvas.create_oval(230,180, w-120, h-180, fill="#1b1b1c", tag="inner")
+	canvas.create_oval(230,180, w-90, h-180, fill="#1b1b1c", tag="inner")
 	#Pack, start loops
-	print("semi")
+def almost2():
+	deleteTags()
+	#inner circle
+	canvas.create_oval(210,180, w-120, h-180, fill="#1b1b1c", tag="inner")
 def response():
-	canvas.delete(canvas.gettags("inner"))
+	deleteTags()
 	#inner circle
 	canvas.create_oval(180,180, w-180, h-180, fill="#1b1b1c", tag="inner")
 	#Make Triangle
@@ -86,10 +116,17 @@ window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 #make canvas object
 canvas = tk.Canvas(window, width = w, height = h, bg='#c2d1ea', highlightbackground="#c2d1ea")
 #Make Eighball
-canvas.create_oval(10,10, w-10, h-10, fill="black")
+canvas.create_oval(10,10, w-10, h-10, fill="black", outline="#1b1b1c")
+canvas.create_oval(180,180, w-180, h-180, fill="#1b1b1c", tag="backside-inner")
+canvas.create_text(300,300,fill="white",font="Calibri 70 bold", text="8", tag="backside")
 canvas.pack()
+
+####comment for single response testing###
 canvas.bind("<Button-1>", clicked)
-# almost()
-# response()
-# canvas.create_text(200,200,fill="white",font="Calibri 5 bold", text=lst[15], tag="response")
+
+#### unlock for testing single response ####
+# points = [225, 255, 375, 255, 300, 375]
+# canvas.create_polygon(points,fill="blue", tag="triangle")
+# canvas.create_text(300,300,fill="white",font="Calibri 7 bold", text=lst[15], tag="response")
+
 window.mainloop()
