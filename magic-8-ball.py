@@ -23,7 +23,7 @@ lst.extend([" It is certain.",
 			" My reply is no.",
 			"  My sources\n     say no.",
 			" Outlook not so\n         good.",
-			# " Very doubtful.",
+			" Very doubtful.",
 			"Duh."])
 def deleteTags():
 	canvas.delete("all")
